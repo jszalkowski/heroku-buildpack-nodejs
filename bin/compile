@@ -57,6 +57,26 @@ trap 'handle_failure' ERR
 [ -f "$BUILD_DIR/yarn.lock" ] && YARN=true || YARN=false
 
 ### Failures that should be caught immediately
+if [ -f $build_dir/bower.json ]; then
+  npm install bower
+  echo "-----> Found bower.json, running bower install"
+  $build_dir/node_modules/.bin/bower install
+else
+  echo "-----> No Bower.json found"
+fi
+
+if [ -f $build_dir/grunt.js ] || [ -f $build_dir/Gruntfile.js ] || [ -f $build_dir/Gruntfile.coffee ]; then
+  npm install grunt-cli
+else
+  echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
+fi
+
+if [ -f $build_dir/gulpfile.js ]; then
+  npm install gulp
+  $build_dir/node_modules/.bin/gulp dist
+else
+  echo "-----> No Gulpfile found"
+fi
 
 fail_dot_heroku "$BUILD_DIR"
 fail_dot_heroku_node "$BUILD_DIR"

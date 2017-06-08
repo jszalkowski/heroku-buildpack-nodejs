@@ -2,8 +2,14 @@
 # bin/detect <build-dir>
 
 if [ -f $1/package.json ]; then
-  echo "Node.js"
-  exit 0
+  echo "Node.js Detected"
+else
+  echo "No package.json" && exit 1
 fi
 
-exit 1
+if [ -f $1/bower.json ]; then
+  echo "Bower Detected"
+else
+  echo "No bower.json"
+  exit 1
+fi
