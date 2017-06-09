@@ -66,14 +66,15 @@ else
 fi
 
 if [ -f $build_dir/grunt.js ] || [ -f $build_dir/Gruntfile.js ] || [ -f $build_dir/Gruntfile.coffee ]; then
-  npm install grunt-cli
+  yarn install grunt-cli
 else
   echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
 fi
 
 if [ -f $build_dir/gulpfile.js ]; then
-  npm install gulp
+  yarn install gulp
   $build_dir/node_modules/.bin/gulp dist
+   $build_dir/node_modules/.bin/gulp static-assets
 else
   echo "-----> No Gulpfile found"
 fi
