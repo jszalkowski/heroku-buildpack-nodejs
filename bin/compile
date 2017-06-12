@@ -57,7 +57,7 @@ trap 'handle_failure' ERR
 [ -f "$BUILD_DIR/yarn.lock" ] && YARN=true || YARN=false
 
 ### Failures that should be caught immediately
-if [ -f $build_dir/bower.json ]; then
+if [ -f "$BUILD_DIR/bower.json" ]; then
   yarn install bower
   echo "-----> Found bower.json, running bower install"
   $build_dir/node_modules/.bin/bower install
