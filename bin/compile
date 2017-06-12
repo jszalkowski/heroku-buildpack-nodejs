@@ -142,6 +142,7 @@ header "Installing binaries"
 install_bins | output "$LOG_FILE"
 
 bower_install() {
+  echo "Bower Install"
   if [ -f "$BUILD_DIR/bower.json" ]; then
     echo "-----> Found bower.json"
     yarn install bower
