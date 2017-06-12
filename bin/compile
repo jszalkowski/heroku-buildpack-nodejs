@@ -38,6 +38,9 @@ export PATH="$BUILD_DIR/.heroku/node/bin:$BUILD_DIR/.heroku/yarn/bin":$PATH
 LOG_FILE=$(mktemp -t node-build-log.XXXXX)
 echo "" > "$LOG_FILE"
 
+echo "-----> FOO"
+echo "-----> TEST FOO" > "$LOG_FILE"
+
 ### Handle errors
 
 handle_failure() {
