@@ -197,6 +197,8 @@ build_dependencies() {
   else
     npm_node_modules "$BUILD_DIR"
   fi
+  
+  bower_install
 
   mtime "modules.time.cache.$cache_status" "${start}"
 
