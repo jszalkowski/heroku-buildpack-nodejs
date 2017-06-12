@@ -62,19 +62,19 @@ if [ -f "$BUILD_DIR/bower.json" ]; then
   echo "-----> Found bower.json, running bower install"
   $BUILD_DIR/node_modules/.bin/bower install
 else
-  echo "$build_dir and $(ls -1) -----> No Bower.json found"
+  echo "$BUILD_DIR and $(ls -1) -----> No Bower.json found"
 fi
 
-if [ -f $build_dir/grunt.js ] || [ -f $build_dir/Gruntfile.js ] || [ -f $build_dir/Gruntfile.coffee ]; then
+if [ -f $BUILD_DIR/grunt.js ] || [ -f $BUILD_DIR/Gruntfile.js ] || [ -f $BUILD_DIR/Gruntfile.coffee ]; then
   yarn install grunt-cli
 else
   echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
 fi
 
-if [ -f $build_dir/gulpfile.js ]; then
+if [ -f $BUILD_DIR/gulpfile.js ]; then
   yarn install gulp
-  $build_dir/node_modules/.bin/gulp dist
-   $build_dir/node_modules/.bin/gulp static-assets
+  $BUILD_DIR/node_modules/.bin/gulp dist
+   $BUILD_DIR/node_modules/.bin/gulp static-assets
 else
   echo "-----> No Gulpfile found"
 fi
