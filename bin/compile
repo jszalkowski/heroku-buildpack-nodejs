@@ -58,21 +58,6 @@ trap 'handle_failure' ERR
 
 ### Failures that should be caught immediately
 
-if [ -f $BUILD_DIR/grunt.js ] || [ -f $BUILD_DIR/Gruntfile.js ] || [ -f $BUILD_DIR/Gruntfile.coffee ]; then
-  yarn install grunt-cli
-else
-  echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
-fi
-
-if [ -f $BUILD_DIR/gulpfile.js ]; then
-  echo "-----> Found Gulpfile"
-  yarn install gulp
-  $BUILD_DIR/node_modules/.bin/gulp dist
-  $BUILD_DIR/node_modules/.bin/gulp static-assets
-else
-  echo "-----> No Gulpfile found"
-fi
-
 fail_dot_heroku "$BUILD_DIR"
 fail_dot_heroku_node "$BUILD_DIR"
 fail_invalid_package_json "$BUILD_DIR"
@@ -141,18 +126,6 @@ install_bins() {
 header "Installing binaries"
 install_bins | output "$LOG_FILE"
 
-bower_install() {
-  echo "Bower Install"
-  if [ -f "$BUILD_DIR/bower.json" ]; then
-    echo "-----> Found bower.json"
-    yarn install bower
-    echo "-----> Found bower.json, running bower install"
-    $BUILD_DIR/node_modules/.bin/bower install
-  else
-    echo "$BUILD_DIR and $(ls -1) -----> No Bower.json found"
-  fi
-}
-
 restore_cache() {
   local cache_status="$(get_cache_status)"
 
@@ -195,8 +168,6 @@ build_dependencies() {
   else
     npm_node_modules "$BUILD_DIR"
   fi
-  
-  bower_install
 
   mtime "modules.time.cache.$cache_status" "${start}"
 
