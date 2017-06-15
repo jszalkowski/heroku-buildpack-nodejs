@@ -38,9 +38,6 @@ export PATH="$BUILD_DIR/.heroku/node/bin:$BUILD_DIR/.heroku/yarn/bin":$PATH
 LOG_FILE=$(mktemp -t node-build-log.XXXXX)
 echo "" > "$LOG_FILE"
 
-echo "-----> FOO"
-echo "-----> TEST FOO" > "$LOG_FILE"
-
 ### Handle errors
 
 handle_failure() {
@@ -155,9 +152,6 @@ bower_install() {
     echo "$BUILD_DIR and $(ls -1) -----> No Bower.json found"
   fi
 }
-
-header "Bower install"
-bower_install | output "$LOG_FILE"
 
 restore_cache() {
   local cache_status="$(get_cache_status)"
